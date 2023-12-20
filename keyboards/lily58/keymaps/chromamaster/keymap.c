@@ -1,12 +1,7 @@
 #include QMK_KEYBOARD_H
-#include "oled.c"
 
-enum layer_number {
-  _QWERTY = 0,
-  _LOWER,
-  _RAISE,
-  _ADJUST,
-};
+#include "layers.h"
+#include "oled.c"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
