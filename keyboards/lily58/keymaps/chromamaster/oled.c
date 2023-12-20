@@ -85,7 +85,7 @@ void render_last_key_pressed(void) {
 }
 
 void render_last_keys_pressed(void) {
-    oled_write_ln(keylogger_last_keys_pressed(), false);
+    oled_write(keylogger_last_keys_pressed(), false);
 }
 
 #endif // OLED_C

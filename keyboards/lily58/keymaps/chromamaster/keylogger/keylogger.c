@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 static char last_key_pressed = ' ';
-static char last_keys_pressed[6] = {};
+static char last_keys_pressed[6] = {' ', ' ', ' ', ' ', ' ', '\0'};
 static int keys_pressed_index = 0;
 static const char keycode_to_key[60] = {
     ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
@@ -25,7 +25,8 @@ void keylogger_record_key_pressed(uint16_t keycode) {
     // Clear the buffer
     if (keys_pressed_index == sizeof(last_keys_pressed) - 1) {
         keys_pressed_index = 0;
-        for (int i = 0; i < sizeof(last_keys_pressed) - 1; i++) {
+        // Do not remove the `\0` at the end of the string
+        for (int i = 0; i < sizeof(last_keys_pressed) - 2; i++) {
             last_keys_pressed[i] = ' ';
         }
     }
