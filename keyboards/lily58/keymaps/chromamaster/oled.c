@@ -5,9 +5,10 @@
 
 #include "layers.h"
 #include "keylogger/keylogger.h"
+#include "bongocat/bongocat.h"
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    if (!is_keyboard_master()) return OLED_ROTATION_180;
+    if (!is_keyboard_master()) return OLED_ROTATION_90;
     return OLED_ROTATION_270; // Vertical screen
 }
 
@@ -40,7 +41,7 @@ bool oled_task_user(void) {
         return false;
     }
 
-    oled_write(read_logo(), false);
+    bongocat_render();
 
     return false;
 }

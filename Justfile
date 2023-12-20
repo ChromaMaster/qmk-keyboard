@@ -11,8 +11,8 @@ sync:
    git submodule update --init --recursive
 
 # Syncs, cleans and adds the custom keymap to qmk_firmware
-pre: sync clean
-   ln -s $PWD/{{keymap_path}}/{{default_km}} $PWD/qmk_firmware/{{keymap_path}}
+pre: sync
+   ln -fs $PWD/{{keymap_path}}/{{default_km}} $PWD/qmk_firmware/{{keymap_path}}
 
 # Build the custom keyboard firware
 build: pre
