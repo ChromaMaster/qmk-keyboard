@@ -1,5 +1,7 @@
 //SSD1306 OLED update loop, make sure to enable OLED_ENABLE=yes in rules.mk
 #ifdef OLED_ENABLE
+#ifndef OLED_C
+#define OLED_C
 
 #include "layers.h"
 #include "keylogger/keylogger.h"
@@ -86,4 +88,5 @@ void render_last_keys_pressed(void) {
     oled_write_ln(keylogger_last_keys_pressed(), false);
 }
 
+#endif // OLED_C
 #endif // OLED_ENABLE
