@@ -19,6 +19,7 @@ void render_caps_look(void);
 void render_layer_state(void);
 void render_last_key_pressed(void);
 void render_last_keys_pressed(void);
+void render_words_per_minute(void);
 
 // If you want to change the display of OLED, you need to change here
 bool oled_task_user(void) {
@@ -31,6 +32,10 @@ bool oled_task_user(void) {
         
         render_last_key_pressed();
         render_last_keys_pressed();
+
+        render_empty_line();
+
+        render_words_per_minute();
 
         return false;
     }
@@ -49,7 +54,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 void render_empty_line(void) {
-    oled_write_ln(PSTR(""), false);
+    oled_write_P(PSTR("     "), false);
 }
 
 void render_caps_look(void) {
@@ -64,7 +69,7 @@ void render_caps_look(void) {
 void render_layer_state(void) {
     switch (get_highest_layer(layer_state)) {
         case _ADJUST:
-            oled_write_ln(PSTR(" ADJ "), false);
+            oled_write_P(PSTR(" ADJ "), false);
             break;
         case _LOWER:
             oled_write_P(PSTR(" LOW "), false);
@@ -86,6 +91,16 @@ void render_last_key_pressed(void) {
 
 void render_last_keys_pressed(void) {
     oled_write(keylogger_last_keys_pressed(), false);
+}
+
+void render_words_per_minute(void){
+    // Not sure why need to do this. If it's oled_write_P(PSTR(" WPM "), false);, it will not work.
+    char *text = " WPM ";
+    oled_write(text, false);
+
+    char wpm_str[6] = {};
+    sprintf(wpm_str, " %03d ", get_current_wpm());
+    oled_write(wpm_str, false);
 }
 
 #endif // OLED_C
