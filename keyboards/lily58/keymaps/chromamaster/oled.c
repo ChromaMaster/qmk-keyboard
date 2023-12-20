@@ -2,7 +2,7 @@
 #ifdef OLED_ENABLE
 
 #include "layers.h"
-#include "keylogger.h"
+#include "keylogger/keylogger.h"
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     if (!is_keyboard_master()) return OLED_ROTATION_180;
