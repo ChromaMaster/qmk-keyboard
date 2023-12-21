@@ -7,7 +7,6 @@
 #define NUM_TAP_FRAMES 2
 #define NUM_OLED_BYTES 512
 #define IDLE_FRAME_DURATION 200 // Idle animation iteration rate in ms
-#define ANIM_FRAME_DURATION 500 // Anim animation iteration rate in ms
 
 static const char PROGMEM idle_1_block_map[] = { //IDLE_1 and IDLE_2
     0x80, 0x03, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x18, 0x00, 0x00, 0x00, 0x70, 0x00, 0x00,

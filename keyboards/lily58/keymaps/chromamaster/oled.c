@@ -6,6 +6,7 @@
 #include "layers.h"
 #include "keylogger/keylogger.h"
 #include "bongocat/bongocat.h"
+#include "notification/notification.h"
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     if (!is_keyboard_master()) return OLED_ROTATION_90;
@@ -41,6 +42,14 @@ bool oled_task_user(void) {
         return false;
     }
 
+    switch(notification_read()) {
+        case NOTIFICATION_KEY_PRESSED:
+            bongocat_render_tap(0);
+            break;
+        default:
+            break;
+    }
+
     bongocat_render();
 
     return false;
@@ -49,6 +58,7 @@ bool oled_task_user(void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed){
         keylogger_record_key_pressed(keycode);
+        notification_write(NOTIFICATION_KEY_PRESSED);
     }
 
     return true;
