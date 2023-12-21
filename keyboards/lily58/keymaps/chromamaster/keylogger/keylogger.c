@@ -1,11 +1,13 @@
 #include "keylogger.h"
 
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 static char last_key_pressed = ' ';
 static char last_keys_pressed[6] = {' ', ' ', ' ', ' ', ' ', '\0'};
 static int keys_pressed_index = 0;
+
+// clang-format off
 static const char keycode_to_key[60] = {
     ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
     'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
@@ -13,6 +15,7 @@ static const char keycode_to_key[60] = {
     '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
     'R', 'E', 'B', 'T', ' ', ' ', ' ', ' ', ' ', ' ',
     ' ', ';', '\'', ' ', ',', '.', '/', ' ', ' ', ' '};
+// clang-format on
 
 void keylogger_record_key_pressed(uint16_t keycode) {
     if (keycode >= 60) {

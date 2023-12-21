@@ -6,4 +6,4 @@
 void bongocat_render(void);
 void bongocat_render_tap(uint16_t keycode);
 
-#endif // BONGOCAT_H
+#endif  // BONGOCAT_H

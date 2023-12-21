@@ -1,16 +1,17 @@
-//SSD1306 OLED update loop, make sure to enable OLED_ENABLE=yes in rules.mk
+// SSD1306 OLED update loop, make sure to enable OLED_ENABLE=yes in rules.mk
 #ifdef OLED_ENABLE
 #ifndef OLED_C
 #define OLED_C
 
-#include "layers.h"
-#include "keylogger/keylogger.h"
 #include "bongocat/bongocat.h"
+#include "keylogger/keylogger.h"
+#include "layers.h"
 #include "notification/notification.h"
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    if (!is_keyboard_master()) return OLED_ROTATION_90;
-    return OLED_ROTATION_270; // Vertical screen
+    if (!is_keyboard_master())
+        return OLED_ROTATION_90;
+    return OLED_ROTATION_270;  // Vertical screen
 }
 
 // When you add source files to SRC in rules.mk, you can use functions.
@@ -26,12 +27,11 @@ void render_words_per_minute(void);
 // If you want to change the display of OLED, you need to change here
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-
         render_caps_look();
         render_layer_state();
-        
+
         render_empty_line();
-        
+
         render_last_key_pressed();
         render_last_keys_pressed();
 
@@ -42,7 +42,7 @@ bool oled_task_user(void) {
         return false;
     }
 
-    switch(notification_read()) {
+    switch (notification_read()) {
         case NOTIFICATION_KEY_PRESSED:
             bongocat_render_tap(0);
             break;
@@ -56,7 +56,7 @@ bool oled_task_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed){
+    if (record->event.pressed) {
         keylogger_record_key_pressed(keycode);
         notification_write(NOTIFICATION_KEY_PRESSED);
     }
@@ -104,7 +104,7 @@ void render_last_keys_pressed(void) {
     oled_write(keylogger_last_keys_pressed(), false);
 }
 
-void render_words_per_minute(void){
+void render_words_per_minute(void) {
     // Not sure why need to do this. If it's oled_write_P(PSTR(" WPM "), false);, it will not work.
     char *text = " WPM ";
     oled_write(text, false);
@@ -114,5 +114,5 @@ void render_words_per_minute(void){
     oled_write(wpm_str, false);
 }
 
-#endif // OLED_C
-#endif // OLED_ENABLE
+#endif  // OLED_C
+#endif  // OLED_ENABLE

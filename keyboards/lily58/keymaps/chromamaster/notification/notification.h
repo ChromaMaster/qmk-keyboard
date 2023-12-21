@@ -9,4 +9,4 @@ typedef enum {
 void notification_write(notification_t notification);
 notification_t notification_read(void);
 
-#endif // NOTIFICATION_H
+#endif  // NOTIFICATION_H

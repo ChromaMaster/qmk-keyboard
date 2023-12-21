@@ -24,7 +24,7 @@ flash: pre
 
 # Format the code using clang-format
 format:
-    fd -E qmk_firmware ".*.c|.*.h" | xargs clang-format -style=file -i
+    fd -E qmk_firmware -t f ".*.c|.*.h" | xargs clang-format -style=file -i
 
 # Removes the custom keymap from qmk_firmware and cleans the build
 clean:

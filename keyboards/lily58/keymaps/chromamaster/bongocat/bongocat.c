@@ -2,17 +2,17 @@
 
 #include QMK_KEYBOARD_H
 
-uint32_t anim_timer         = 0;
-uint32_t anim_sleep         = 0;
-uint8_t  current_idle_frame = 0;
+uint32_t anim_timer = 0;
+uint32_t anim_sleep = 0;
+uint8_t current_idle_frame = 0;
 
 static bool tap_anim = false;
 
 static void oled_write_compressed_P(const char* input_block_map, const char* input_block_list) {
     uint16_t block_index = 0;
-    for (uint16_t i=0; i<NUM_OLED_BYTES; i++) {
-        uint8_t bit = i%8;
-        uint8_t map_index = i/8;
+    for (uint16_t i = 0; i < NUM_OLED_BYTES; i++) {
+        uint8_t bit = i % 8;
+        uint8_t map_index = i / 8;
         uint8_t _block_map = (uint8_t)pgm_read_byte_near(input_block_map + map_index);
         uint8_t nonzero_byte = (_block_map & (1 << bit));
         if (nonzero_byte) {
@@ -25,7 +25,7 @@ static void oled_write_compressed_P(const char* input_block_map, const char* inp
     }
 }
 
-static void animate(void){
+static void animate(void) {
     if (!tap_anim) {
         current_idle_frame = (current_idle_frame + 1) % NUM_IDLE_FRAMES;
         uint8_t idx = abs((NUM_IDLE_FRAMES - 1) - current_idle_frame);
@@ -36,7 +36,7 @@ static void animate(void){
 }
 
 void bongocat_render(void) {
-    if (get_current_wpm() != 000) {    
+    if (get_current_wpm() != 000) {
         oled_on();
 
         tap_anim = true;
@@ -55,7 +55,7 @@ void bongocat_render(void) {
     if (timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
         oled_off();
         return;
-    } 
+    }
 
     if (timer_elapsed32(anim_timer) > IDLE_FRAME_DURATION) {
         anim_timer = timer_read32();
