@@ -22,6 +22,10 @@ build: pre
 flash: pre
    qmk flash -j0 -kb lily58/rev1 -km {{default_km}}
 
+# Format the code using clang-format
+format:
+    fd -E qmk_firmware ".*.c|.*.h" | xargs clang-format -style=file -i
+
 # Removes the custom keymap from qmk_firmware and cleans the build
 clean:
    rm -f $PWD/qmk_firmware/{{keymap_path}}/{{default_km}}
