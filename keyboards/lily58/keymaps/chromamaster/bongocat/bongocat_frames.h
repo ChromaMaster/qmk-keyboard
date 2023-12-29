@@ -113,7 +113,7 @@ static const char PROGMEM tap_2_block_list[] = { //TAP_2
 };
 
 // idle_1 and idle_2 are identical, so share them and save some space
-static const char* idle_frames[NUM_IDLE_FRAMES] = {
+const char* idle_frames[NUM_IDLE_FRAMES] = {
     idle_1_block_list,
     idle_1_block_list,
     idle_2_block_list,
@@ -121,13 +121,13 @@ static const char* idle_frames[NUM_IDLE_FRAMES] = {
     idle_4_block_list
 };
 
-static const char* tap_frames[NUM_TAP_FRAMES] = {
+const char* tap_frames[NUM_TAP_FRAMES] = {
     tap_1_block_list,
     tap_2_block_list
 };
 
 // idle_1 and idle_2 are identical, so save some space
-static const char* idle_block_map[NUM_IDLE_FRAMES] = {
+const char* idle_block_map[NUM_IDLE_FRAMES] = {
     idle_1_block_map,
     idle_1_block_map,
     idle_2_block_map,
@@ -135,7 +135,7 @@ static const char* idle_block_map[NUM_IDLE_FRAMES] = {
     idle_4_block_map
 };
 
-static const char* tap_block_map[NUM_TAP_FRAMES] = {
+const char* tap_block_map[NUM_TAP_FRAMES] = {
     tap_1_block_map,
     tap_2_block_map
 };
