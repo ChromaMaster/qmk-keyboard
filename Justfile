@@ -18,9 +18,16 @@ pre: sync
 build: pre
    qmk compile -j0 -kb lily58/rev1 -km {{default_km}}
 
-# Flash the custom keyboard firmware
-flash: pre
-   qmk flash -j0 -kb lily58/rev1 -km {{default_km}}
+# Flash the custom keyboard firmware (leader side)
+flash: flash-leader
+
+# Flash the custom keyboard firmware (leader side)
+flash-leader: pre
+   qmk flash -j0 -kb lily58/rev1 -km {{default_km}} -bl avrdude-split-left
+
+# Flash the custom keyboard firmware (follower side)
+flash-follower: pre
+   qmk flash -j0 -kb lily58/rev1 -km {{default_km}} -bl avrdude-split-right
 
 # Format the code using clang-format
 format:
