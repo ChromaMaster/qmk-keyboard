@@ -55,15 +55,6 @@ bool oled_task_user(void) {
     return false;
 }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        keylogger_record_key_pressed(keycode);
-        notification_write(NOTIFICATION_KEY_PRESSED);
-    }
-
-    return true;
-}
-
 void render_empty_line(void) {
     oled_write_P(PSTR("     "), false);
 }
