@@ -3,7 +3,7 @@ set dotenv-load := true
 default:
     @just --list
 
-default_km := "chromamaster"
+default_km := "chromamaster_default"
 keymap_path := "keyboards/lily58/keymaps"
 
 # Download and sync all the submodules needed (qmk_firmware)
