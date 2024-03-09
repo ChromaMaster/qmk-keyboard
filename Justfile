@@ -19,15 +19,15 @@ pre +args: sync
 build *args=default_km: (pre args)
    qmk compile -j0 -kb lily58/rev1 -km chromamaster_$1
 
-# Flash the custom keyboard firmware (leader side)
-flash: flash-leader
+# Flash the custom keyboard firmware
+flash: flash-left
 
-# Flash the custom keyboard firmware (leader side)
-flash-leader *args=default_km: (pre args)
+# Flash the custom keyboard firmware
+flash-left *args=default_km: (pre args)
    qmk flash -j0 -kb lily58/rev1 -km chromamaster_$1 -bl avrdude-split-left
 
-# Flash the custom keyboard firmware (follower side)
-flash-follower *args=default_km: (pre args)
+# Flash the custom keyboard firmware
+flash-right *args=default_km: (pre args)
    qmk flash -j0 -kb lily58/rev1 -km chromamaster_$1 -bl avrdude-split-right
 
 # Format the code using clang-format
