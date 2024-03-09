@@ -16,11 +16,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |BackSP|
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LShift|   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+ * |LShift|   A  |alt/S |ctrl/D|shft/F|   G  |-------.    ,-------|   H  |shft/J|ctrl/K|alt/L |   ;  |  '   |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |LCTRL |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space /        \ Enter\  |RAISE |BackSP| RAlt |
+ *                   |      | LGUI |LOWER | /Space /        \ Enter\  |RAISE |BackSP|      |
  *                   |      |      |      |/      /          \      \ |      |      |      |
  *                   `---------------------------'            '------''--------------------'  
  */
@@ -28,9 +28,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_QWERTY] = LAYOUT(
   KC_ESC,   KC_1,         KC_2,           KC_3,         KC_4,         KC_5,                     KC_6,       KC_7,         KC_8,           KC_9,         KC_0,             KC_GRV,
   KC_TAB,   KC_Q,         KC_W,           KC_E,         KC_R,         KC_T,                     KC_Y,       KC_U,         KC_I,           KC_O,         KC_P,             KC_BSPC,
-  KC_LSFT,  ALT_T(KC_A),  GUI_T(KC_S),    LCTL_T(KC_D), LSFT_T(KC_F), KC_G,                     KC_H,       RSFT_T(KC_J), RCTL_T(KC_K),   GUI_T(KC_L),  ALT_T(KC_SCLN),  KC_QUOT,
+  KC_LSFT,  KC_A,  ALT_T(KC_S),    LCTL_T(KC_D), LSFT_T(KC_F), KC_G,                     KC_H,       RSFT_T(KC_J), RCTL_T(KC_K),   ALT_T(KC_L),  KC_SCLN,  KC_QUOT,
   KC_LCTL,  KC_Z,         KC_X,           KC_C,         KC_V,         KC_B, XXXXXXX,  XXXXXXX,  KC_N,       KC_M,         KC_COMM,        KC_DOT,       KC_SLSH,          KC_RSFT,
-                                KC_LALT,       KC_LGUI,     MO(_LOWER),     KC_SPC,   KC_ENT,   MO(_RAISE), KC_BSPC,      KC_RALT
+                                XXXXXXX,       KC_LGUI,     MO(_LOWER),     KC_SPC,   KC_ENT,   MO(_RAISE), KC_BSPC,      XXXXXXX
 ),
 
 
@@ -124,16 +124,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case ALT_T(KC_A):
-        case ALT_T(KC_SCLN):
-        case GUI_T(KC_S):
-        case GUI_T(KC_L):
+        case ALT_T(KC_S):
+        case ALT_T(KC_L):
         case LCTL_T(KC_D):
         case RCTL_T(KC_K):
-          return 300;
+          return TAPPING_TERM + 150;
         case LSFT_T(KC_F):
         case RSFT_T(KC_J):
-          return 140;
+          return TAPPING_TERM + 75;
         default:
             return TAPPING_TERM;
     }
