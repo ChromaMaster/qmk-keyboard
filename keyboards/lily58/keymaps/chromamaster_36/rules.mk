@@ -13,8 +13,8 @@ WPM_ENABLE = yes            # Enable typing speed display
 
 # If you want to change the display of OLED, you need to change here
 SRC +=  ./lib/logo_reader.c \
-        ./keyboards/lily58/keymaps/chromamaster_mt/keyboard.c \
-        ./keyboards/lily58/keymaps/chromamaster_mt/notification/notification.c \
-        ./keyboards/lily58/keymaps/chromamaster_mt/keylogger/keylogger.c \
-        ./keyboards/lily58/keymaps/chromamaster_mt/bongocat/bongocat.c
+        ./keyboards/lily58/keymaps/chromamaster_36/keyboard.c \
+        ./keyboards/lily58/keymaps/chromamaster_36/notification/notification.c \
+        ./keyboards/lily58/keymaps/chromamaster_36/keylogger/keylogger.c \
+        ./keyboards/lily58/keymaps/chromamaster_36/bongocat/bongocat.c
         
