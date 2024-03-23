@@ -6,6 +6,7 @@
 static char last_key_pressed = ' ';
 static char last_keys_pressed[6] = {' ', ' ', ' ', ' ', ' ', '\0'};
 static int keys_pressed_index = 0;
+static bool priv_mode = true;
 
 // clang-format off
 static const char keycode_to_key[60] = {
@@ -22,8 +23,12 @@ void keylogger_record_key_pressed(uint16_t keycode) {
         return;
     }
 
-    // Rrecord last key pressed
-    last_key_pressed = keycode_to_key[keycode];
+    // Record the last key pressed or '*' if in priv mode
+    if (priv_mode) {
+        last_key_pressed = '*';
+    } else {
+        last_key_pressed = keycode_to_key[keycode];
+    }
 
     // Clear the buffer
     if (keys_pressed_index == sizeof(last_keys_pressed) - 1) {
@@ -44,4 +49,8 @@ char keylogger_last_key_pressed() {
 
 const char *keylogger_last_keys_pressed() {
     return last_keys_pressed;
+}
+
+void keylogger_toggle_priv_mode(void) {
+    priv_mode = !priv_mode;
 }

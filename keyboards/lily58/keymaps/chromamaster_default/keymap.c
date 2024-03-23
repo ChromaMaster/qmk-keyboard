@@ -1,11 +1,10 @@
 #include QMK_KEYBOARD_H
 
+#include "keylogger/keylogger.h"
 #include "layers.h"
 #include "oled.c"
 
-enum custom_keycodes {
-  KC_ENYE = SAFE_RANGE
-};
+enum custom_keycodes { KC_ENYE = SAFE_RANGE, KC_PRIV };
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -79,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      | Vol- | Mute | Vol+ |      |                    |      |Brigh+|      |Brigh-|      |      |
+ * |      |      | Vol- | Mute | Vol+ |      |                    |      |Brigh+|      |Brigh-| PRIV |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | CAPS |      |      |      |      |      |-------.    ,-------|      |      |RGB ON| HUE+ | SAT+ | VAL+ |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
@@ -91,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_ADJUST] = LAYOUT(
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX,                   XXXXXXX, KC_BRIU, XXXXXXX, KC_BRID, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX,                   XXXXXXX, KC_BRIU, XXXXXXX, KC_BRID, KC_PRIV, XXXXXXX,
   KC_CAPS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ENYE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                              _______, _______, _______, _______, _______, _______, _______, _______
@@ -105,16 +104,19 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
-      switch(keycode) {
-        case KC_ENYE: // ñ
-          tap_code16(RALT(KC_N));
-          break;
-        default:
-          break;
-      }
+        switch (keycode) {
+            case KC_ENYE:  // ñ
+                tap_code16(RALT(KC_N));
+                break;
+            case KC_PRIV:  // Toggle private mode
+                keylogger_toggle_priv_mode();
+                break;
+            default:
+                break;
+        }
 
-      keylogger_record_key_pressed(keycode);
-      notification_write(NOTIFICATION_KEY_PRESSED);
+        keylogger_record_key_pressed(keycode);
+        notification_write(NOTIFICATION_KEY_PRESSED);
     }
 
     return true;
