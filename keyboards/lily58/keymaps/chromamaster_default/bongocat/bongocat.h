@@ -4,6 +4,6 @@
 #include <stdint.h>
 
 void bongocat_render(void);
-void bongocat_render_tap(uint16_t keycode);
+void bongocat_toggle_tap(void);
 
 #endif  // BONGOCAT_H

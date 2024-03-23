@@ -44,7 +44,7 @@ bool oled_task_user(void) {
 
     switch (notification_read()) {
         case NOTIFICATION_KEY_PRESSED:
-            bongocat_render_tap(0);
+            bongocat_toggle_tap();
             break;
         default:
             break;

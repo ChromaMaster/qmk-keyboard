@@ -51,6 +51,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_SAT_STEP 17
 #define RGBLIGHT_VAL_STEP 17
 
+#ifdef OLED_ENABLE
+#define OLED_TIMEOUT 10000
+#endif
+
 // Underglow
 /*
 #undef RGBLED_NUM
