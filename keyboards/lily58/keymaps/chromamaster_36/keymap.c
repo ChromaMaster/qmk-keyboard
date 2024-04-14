@@ -3,9 +3,7 @@
 #include "layers.h"
 #include "oled.c"
 
-enum custom_keycodes {
-  KC_ENYE = SAFE_RANGE
-};
+enum custom_keycodes { KC_ENYE = SAFE_RANGE };
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -107,16 +105,16 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
-      switch(keycode) {
-        case KC_ENYE: // ñ
-          tap_code16(RALT(KC_N));
-          break;
-        default:
-          break;
-      }
+        switch (keycode) {
+            case KC_ENYE:  // ñ
+                tap_code16(RALT(KC_N));
+                break;
+            default:
+                break;
+        }
 
-      keylogger_record_key_pressed(keycode);
-      notification_write(NOTIFICATION_KEY_PRESSED);
+        keylogger_record_key_pressed(keycode);
+        notification_write(NOTIFICATION_KEY_PRESSED);
     }
 
     return true;
@@ -128,10 +126,10 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case ALT_T(KC_L):
         case LCTL_T(KC_D):
         case RCTL_T(KC_K):
-          return TAPPING_TERM + 150;
+            return TAPPING_TERM + 150;
         case LSFT_T(KC_F):
         case RSFT_T(KC_J):
-          return TAPPING_TERM + 75;
+            return TAPPING_TERM + 75;
         default:
             return TAPPING_TERM;
     }

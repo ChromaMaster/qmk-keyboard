@@ -1,4 +1,5 @@
 #include "bongocat.h"
+
 #include "bongocat_frames.h"
 
 #include QMK_KEYBOARD_H
@@ -34,7 +35,6 @@ static void animate_idle(void) {
     oled_write_compressed_P(idle_block_map[idx], idle_frames[idx]);
 }
 
-
 static void animate_tap(void) {
     oled_write_compressed_P(tap_block_map[tap_animation_toggle], tap_frames[tap_animation_toggle]);
 }
@@ -42,9 +42,13 @@ static void animate_tap(void) {
 void bongocat_render(void) {
     // Handle OLED screen power state using the timeout.
     if (timer_elapsed32(screen_on_timeout) <= OLED_TIMEOUT) {
-        if(!is_oled_on()) oled_on();
+        if (!is_oled_on()) {
+            oled_on();
+        }
     } else {
-        if(is_oled_on()) oled_off();
+        if (is_oled_on()) {
+            oled_off();
+        }
         return;
     }
 
@@ -63,14 +67,14 @@ void bongocat_render(void) {
     return;
 }
 
-void bongocat_toggle_tap(void){
+void bongocat_toggle_tap(void) {
     // Refresh the OLED screen timeout when the tap animation is toggled.
     // This will effectively turn/keep the screen on while the tap animation is active.
     screen_on_timeout = timer_read32();
 
     // Refresh the timeout when the tap animation is toggled.
     tap_animation_timeout = timer_read32();
-    
+
     // Toggle the tap animation
     tap_animation_toggle = !tap_animation_toggle;
 }

@@ -6,8 +6,8 @@
 #define NUM_IDLE_FRAMES 5
 #define NUM_TAP_FRAMES 2
 #define NUM_OLED_BYTES 512
-#define IDLE_FRAME_DURATION 200  // Idle animation iteration rate in ms
-#define TAP_ANIMATION_TIMEOUT 1000 // Tap animation timeout in ms
+#define IDLE_FRAME_DURATION 200     // Idle animation iteration rate in ms
+#define TAP_ANIMATION_TIMEOUT 1000  // Tap animation timeout in ms
 
 // clang-format off
 static const char PROGMEM idle_1_block_map[] = { //IDLE_1 and IDLE_2

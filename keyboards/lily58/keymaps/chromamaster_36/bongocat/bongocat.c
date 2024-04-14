@@ -1,4 +1,5 @@
 #include "bongocat.h"
+
 #include "bongocat_frames.h"
 
 #include QMK_KEYBOARD_H
